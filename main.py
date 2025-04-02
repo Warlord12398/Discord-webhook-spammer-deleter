@@ -1,17 +1,15 @@
 import requests
 import threading
 
-# Custom headers for requests
 HEADERS = {
     "User-Agent": "Mozilla/5.0",
     "Content-Type": "application/json"
 }
 
-# Number of threads for concurrent execution
 THREADS = 10
 
 def spam_webhook(webhook_url, message):
-    """Continuously sends messages to the given webhook."""
+    
     session = requests.Session()
     payload = {"content": message}
 
@@ -28,7 +26,7 @@ def spam_webhook(webhook_url, message):
             print(f"[EXCEPTION] {str(e)}")
 
 def delete_webhook(webhook_url):
-    """Deletes the specified webhook."""
+    
     try:
         response = requests.delete(webhook_url, headers=HEADERS)
         if response.status_code in [200, 204]:
@@ -39,7 +37,7 @@ def delete_webhook(webhook_url):
         print(f"[EXCEPTION] {str(e)}")
 
 def start_spam():
-    """Prompts user for webhook URL and message, then starts spamming."""
+    
     webhook_url = input("Enter Webhook URL: ").strip()
     message = input("Enter Message Content: ").strip()
 
@@ -53,12 +51,12 @@ def start_spam():
         thread.join()
 
 def start_delete():
-    """Prompts user for webhook URL and deletes it."""
+    
     webhook_url = input("Enter Webhook URL to delete: ").strip()
     delete_webhook(webhook_url)
 
 def main():
-    """Main menu for selecting webhook spammer or deleter."""
+    
     print("\nSelect an option:")
     print("1) Webhook Spammer")
     print("2) Webhook Deleter")
